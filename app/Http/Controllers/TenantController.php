@@ -45,7 +45,12 @@ class TenantController extends Controller
      */
     public function update(UpdateTenantRequest $updateTenantRequest, User $tenant): RedirectResponse
     {
-        $tenant->update($updateTenantRequest->validated());
+        if($updateTenantRequest->password)
+        {
+            $tenant->update(['password' => $updateTenantRequest->password]);
+        }
+
+        $tenant->update($updateTenantRequest->except('password'));
 
         alert()->success('Tenant Updated Successfully!');
 
