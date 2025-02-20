@@ -14,7 +14,8 @@
 
 <body>
     <main>
-        <section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
+        <section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center"
+            style="background-image: url({{ asset('images/login/background-login.jpg') }}); background-size: cover; background-position: center;">
             @yield('content')
         </section>
     </main>
