@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'first_name' => 'Test',
-            'middle_name' => 'Test',
             'last_name' => 'User',
             'gender' => GenderType::Male,
             'email' => 'test@example.com',

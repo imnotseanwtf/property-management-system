@@ -23,15 +23,6 @@
         </a>
     </li>
 
-    <li class="nav-item {{ request()->routeIs('users.index') ? 'active' : '' }}">
-        <a href="{{ route('tenant.index') }}" class="nav-link">
-            <span class="sidebar-icon me-3">
-                <i class="fas fa-user-alt fa-fw"></i>
-            </span>
-            <span class="sidebar-text">{{ __('Tenants') }}</span>
-        </a>
-    </li>
-
     <li class="nav-item {{ request()->routeIs('about') ? 'active' : '' }}">
         <a href="{{ route('about') }}" class="nav-link">
             <span class="sidebar-icon">

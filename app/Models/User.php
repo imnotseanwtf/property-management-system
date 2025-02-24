@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Enums\GenderType;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -23,9 +24,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'first_name',
-        'middle_name',
         'last_name',
         'gender',
+        'picture',
         'mobile_number',
         'email',
         'password',
@@ -64,10 +65,14 @@ class User extends Authenticatable
         return Attribute::make(
             get: fn() => trim(implode(' ', array_filter([
                 $this->first_name,
-                $this->middle_name,
                 $this->last_name
             ])))
         );
+    }
+
+    public function leases(): HasMany
+    {
+        return $this->hasMany(Lease::class);
     }
 
     public function isAdmin(): bool

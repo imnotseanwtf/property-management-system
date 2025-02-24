@@ -15,7 +15,7 @@
                 <div class="modal-body">
 
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="first_name">First Name</label>
                                 <input type="text" class="form-control" name="first_name"
@@ -25,17 +25,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-4">
-                            <div class="form-group">
-                                <label for="middle_name">Middle Name</label>
-                                <input type="text" class="form-control" name="middle_name"
-                                    placeholder="Enter middle name" value="{{ old('middle_name') }}" required>
-                                @error('middle_name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-4">
+
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="last_name">Last Name</label>
                                 <input type="text" class="form-control" name="last_name"
@@ -56,6 +47,17 @@
                                     @endforeach
                                 </select>
                                 @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <div class="form-group">
+                                <label for="picture">Picture</label>
+                                <input type="file" class="form-control" name="picture" placeholder="Enter picture"
+                                    value="{{ old('picture') }}" required>
+                                @error('picture')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

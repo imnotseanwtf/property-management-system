@@ -2,8 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Tenant;
-use App\Models\User;
+use App\Models\Property;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -13,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class TenantDataTable extends DataTable
+class PropertyDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -24,18 +23,16 @@ class TenantDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->setRowId('id')
-            ->addColumn('action', fn(User $tenant) => view('tenant.components.action', compact('tenant')))
-            ->addColumn('full_name', fn(User $user) => $user->full_name)
-            ->rawColumns(['action'])
+            ->addColumn('action', fn(Property $property) => view('property.components.action', compact('property')))
         ;
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(User $model): QueryBuilder
+    public function query(Property $model): QueryBuilder
     {
-        return $model->newQuery()->role('tenant');
+        return $model->newQuery();
     }
 
     /**
@@ -44,7 +41,7 @@ class TenantDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('tenant_dataTable')
+            ->setTableId('property_dataTable')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
@@ -67,9 +64,6 @@ class TenantDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('full_name'),
-            Column::make('gender'),
-            Column::make('email'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -83,6 +77,6 @@ class TenantDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Tenant_' . date('YmdHis');
+        return 'Property_' . date('YmdHis');
     }
 }

@@ -16,7 +16,7 @@
                 <div class="modal-body">
 
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="first_name">First Name</label>
                                 <input type="text" class="form-control" name="first_name" id="edit_first_name"
@@ -26,20 +26,11 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-4">
-                            <div class="form-group">
-                                <label for="middle_name">Middle Name</label>
-                                <input type="text" class="form-control" name="middle_name"  id="edit_middle_name"
-                                    placeholder="Enter middle name" value="{{ old('middle_name') }}" required>
-                                @error('middle_name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-4">
+
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="last_name">Last Name</label>
-                                <input type="text" class="form-control" name="last_name"  id="edit_last_name"
+                                <input type="text" class="form-control" name="last_name" id="edit_last_name"
                                     placeholder="Enter last name" value="{{ old('last_name') }}" required>
                                 @error('last_name')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -65,8 +56,8 @@
                         <div class="col-6 mt-3">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" name="email" placeholder="Enter email" id="edit_email"
-                                    value="{{ old('email') }}" required>
+                                <input type="email" class="form-control" name="email" placeholder="Enter email"
+                                    id="edit_email" value="{{ old('email') }}" required>
                                 @error('email')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -87,8 +78,8 @@
                         <div class="col-6 mt-3">
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" name="password"
-                                    placeholder="Enter password" value="{{ old('password') }}">
+                                <input type="password" class="form-control" name="password" placeholder="Enter password"
+                                    value="{{ old('password') }}">
                                 @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

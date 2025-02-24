@@ -25,10 +25,10 @@ class UpdateTenantRequest extends FormRequest
     {
         return [
             'first_name' => ['required', 'string'],
-            'middle_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
             'email' => ['required', 'string', 'email'],
             'mobile_number' => ['required', 'string'],
+            'picture' => ['nullable', 'file', 'image', 'mimes:jpeg,png,gif'],
             'gender' => ['required', new Enum(GenderType::class)],
             'password' => ['nullable', 'min:8', 'confirmed']
         ];

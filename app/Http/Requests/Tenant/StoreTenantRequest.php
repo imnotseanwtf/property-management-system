@@ -25,10 +25,10 @@ class StoreTenantRequest extends FormRequest
     {
         return [
             'first_name' => ['required', 'string'],
-            'middle_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'unique:users,email'],
             'mobile_number' => ['required', 'string', 'unique:users,mobile_number'],
+            'picture' => ['required', 'file', 'image','mimes:jpeg,png,gif'],
             'gender' => ['required', new Enum(GenderType::class)],
             'password' => ['required', 'min:8', 'confirmed']
         ];

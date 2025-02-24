@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\TenantDataTable;
+use App\Enums\UserType;
 use App\Http\Requests\Tenant\StoreTenantRequest;
 use App\Http\Requests\Tenant\UpdateTenantRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TenantController extends Controller
 {
@@ -25,7 +27,9 @@ class TenantController extends Controller
      */
     public function store(StoreTenantRequest $storeTenantRequest): RedirectResponse
     {
-        User::create($storeTenantRequest->validated());
+        User::create($storeTenantRequest->except('picture') + [
+            'picture' => $storeTenantRequest->file('picture')->store('user/images', 'public')
+        ])->assignRole(UserType::Tenant);
 
         alert()->success('Tenant Stored Successfully!');
 
@@ -35,9 +39,9 @@ class TenantController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $tenant): JsonResponse
+    public function show(User $tenant)
     {
-        return response()->json($tenant);
+        return view('tenant.view', compact('tenant'));
     }
 
     /**
@@ -45,9 +49,14 @@ class TenantController extends Controller
      */
     public function update(UpdateTenantRequest $updateTenantRequest, User $tenant): RedirectResponse
     {
-        if($updateTenantRequest->password)
-        {
+        if ($updateTenantRequest->password) {
             $tenant->update(['password' => $updateTenantRequest->password]);
+        }
+
+        if ($updateTenantRequest->hasFile('picture')) {
+            Storage::disk('public')->delete($tenant->picure);
+
+            $tenant->update(['picture' => $updateTenantRequest->file('picture')->store('user/images', 'public')]);
         }
 
         $tenant->update($updateTenantRequest->except('password'));
@@ -63,6 +72,7 @@ class TenantController extends Controller
     public function destroy(User $tenant): RedirectResponse
     {
         $tenant->delete();
+        Storage::disk('public')->delete($tenant->picure);
 
         alert()->success('Tenant Deleted Successfully!');
 
